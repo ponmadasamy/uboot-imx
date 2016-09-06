@@ -351,6 +351,7 @@ int splash_screen_prepare(void)
 	if (lvds_enabled)
 		gpio_set_value(VAR_SOM_BACKLIGHT_EN, 1);
 
+	gpio_set_value(VAR_SOM_BACKLIGHT_EN, 0);
 	return ret;
 }
 #endif
@@ -966,6 +967,8 @@ static void setup_display(void)
 
 	/* Turn off backlight until display is ready */
 	gpio_direction_output(VAR_SOM_BACKLIGHT_EN , 0);
+	gpio_direction_output(DRMC_VAR_SOM_DISP_POWER_EN , 0);
+	gpio_direction_output(DRMC_VAR_SOM_DISP_INV_EN , 1);
 
 	enable_ipu_clock();
 	imx_setup_hdmi();
